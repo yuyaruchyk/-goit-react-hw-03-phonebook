@@ -17,6 +17,32 @@ export class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const storedContacts = JSON.parse(localStorage.getItem('contacts'));
+
+    const savedFilters = JSON.parse(localStorage.getItem('filters'));
+
+    if (storedContacts && storedContacts.length > 0) {
+      this.setState({ contacts: storedContacts });
+    }
+
+    if (savedFilters !== null) {
+      this.setState({ filter: savedFilters });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const updatedContacts = this.state.contacts;
+    const updatedFilters = this.state.filter;
+    if (updatedContacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(updatedContacts));
+    }
+
+    if (updatedFilters !== prevState.filter) {
+      localStorage.setItem('filters', JSON.stringify(updatedFilters));
+    }
+  }
+
   updateFilter = newTopic => {
     this.setState(() => {
       return {
