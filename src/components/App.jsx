@@ -26,9 +26,6 @@ export class App extends Component {
       this.setState({ contacts: storedContacts });
     }
 
-    if (savedFilters !== null) {
-      this.setState({ filter: savedFilters });
-    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -38,9 +35,6 @@ export class App extends Component {
       localStorage.setItem('contacts', JSON.stringify(updatedContacts));
     }
 
-    if (updatedFilters !== prevState.filter) {
-      localStorage.setItem('filters', JSON.stringify(updatedFilters));
-    }
   }
 
   updateFilter = newTopic => {
